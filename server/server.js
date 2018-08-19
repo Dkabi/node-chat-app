@@ -12,7 +12,11 @@ var io = socketIO(server);
 app.use(express.static(publicPath));
 
 io.on('connection',(socket)=>{
+
+  //when client try to connect with the server
   console.log("New User Connected");
+
+  //when client disconnected from server
   socket.on('disconnect',()=>{
     console.log("client disconnected");
   });

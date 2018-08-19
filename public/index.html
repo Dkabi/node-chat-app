@@ -11,10 +11,15 @@
 
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    var socket = io();
+
+    var socket = io(); //To establishing web socket connection between client and server
+
+    //when server connect
     socket.on('connect',()=>{
       console.log('connected to server');
     });
+
+    //when server disconnect
     socket.on('disconnect',()=>{
       console.log('disconnected from server');
     });
