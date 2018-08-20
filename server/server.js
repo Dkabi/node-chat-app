@@ -4,6 +4,7 @@ const socketIO = require('socket.io');
 const http = require('http');
 const dateTime = require('node-datetime');
 
+const {generateMessage} = require('./utils/message');
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
 var app = express();
@@ -28,21 +29,10 @@ io.on('connection',(socket)=>{
   socket.on("createMessage",(data)=>{
         
     console.log(data);
-    socket.emit("newMessage",{
-      from: "ADMIN",
-      text: "Welcome To The Chat App"
-    });
-    socket.broadcast.emit("newMessage",{
-      from: "ADMIN",
-      text: "New User Joined",
-      createdAt:formatted
-    });
+    socket.emit("newMessage",generateMessage("ADMIN","Welcome To The Chat App"));
+    socket.broadcast.emit("newMessage",generateMessage("ADMIN","New User joined"));
     //custom  event reate and send to client 
-    io.emit("newMessage",{
-      from: data.from,
-      text: data.text,
-      createdAt:formatted
-    }); 
+    io.emit("newMessage",generateMessage(data.from,data.text)); 
 
   });  
 
