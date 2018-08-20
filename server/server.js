@@ -31,9 +31,9 @@ io.on('connection',(socket)=>{
     
 
     //custom  event reate and send to client 
-    socket.emit("newMessage",{
-      from: "dibya",
-      text: "Hello",
+    io.emit("newMessage",{
+      from: data.from,
+      text: data.text,
       createdAt:formatted
     }); 
 
