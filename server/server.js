@@ -28,8 +28,15 @@ io.on('connection',(socket)=>{
   socket.on("createMessage",(data)=>{
         
     console.log(data);
-    
-
+    socket.emit("newMessage",{
+      from: "ADMIN",
+      text: "Welcome To The Chat App"
+    });
+    socket.broadcast.emit("newMessage",{
+      from: "ADMIN",
+      text: "New User Joined",
+      createdAt:formatted
+    });
     //custom  event reate and send to client 
     io.emit("newMessage",{
       from: data.from,
